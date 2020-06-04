@@ -10,7 +10,7 @@
 </head>
 <body>
 <%
-		Connection conn = DBConn.getConnection();
+	//	Connection conn = DBConn.getConnection();
 %>
 <% if(conn != null){ %>
 <h1>DB 연결 성공</h1>
@@ -19,3 +19,4 @@
 <%} %>
 </body>
 </html>
+ 

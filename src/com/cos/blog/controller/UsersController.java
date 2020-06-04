@@ -6,10 +6,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.cos.blog.action.user.Action;
+import com.cos.blog.action.user.UserUsernameCheckAction;
 import com.cos.blog.action.user.UsersJoinAction;
 import com.cos.blog.action.user.UsersJoinProcAction;
+import com.cos.blog.action.user.UsersLoginProcAction;
+import com.cos.blog.action.user.UsersLogoutAction;
+import com.cos.blog.action.user.UsersloginAction;
 
 // http://localhost:8000/blog/user
 @WebServlet("/user")
@@ -53,8 +58,15 @@ public class UsersController extends HttpServlet {
 			//회원 삭제를 진행한 후 로그아웃을 하고 index.jsp로 이동
 		}else if(cmd.equals("login")) {
 			//회원 로그인 페이지로 이동 
+			return new UsersloginAction();
 		}else if(cmd.equals("loginProc")) {
 			//회원 로그인을 수행한 후 세션에 등록하고 index.jsp로 이동
+			return new UsersLoginProcAction();
+		}else if(cmd.equals("logout")) {
+			
+			return new UsersLogoutAction();
+		}else if(cmd.equals("usernameCheck")) {
+			return new UserUsernameCheckAction();
 		}
 		return null;
 	}

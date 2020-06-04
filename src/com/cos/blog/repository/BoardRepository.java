@@ -43,12 +43,16 @@ public class BoardRepository {
 	}
 	
 	public int save(Board board) {
-		final String SQL = "";
+		final String SQL = "insert into board(id,userid,title,content,readcount,createdate) values (board_seq.nextval,?,?,?,?,sysdate)";
 		try {
 		conn = DBConn.getConnection();
 		pstmt = conn.prepareStatement(SQL);
 		//물음표 완성하기
-		
+		pstmt.setInt(1, board.getUserid());
+		pstmt.setString(2, board.getTitle());
+		pstmt.setString(3, board.getContent());
+		pstmt.setInt(4, board.getReadcount());
+
 		return pstmt.executeUpdate();
 		
 		} catch(Exception e) {
