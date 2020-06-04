@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/nav.jsp" %>
 <%@ include file="../include/authentication.jsp" %>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
 
 <div class = "container">
 <form action="/blog/board?cmd=writeProc" method="POST">

@@ -24,7 +24,7 @@ public class BoardWriteProcAction implements Action{
 			Script.getMessage("잘못된 접근입니다.", response);
 			return;
 		}
-		Users principal = (Users) session.getAttribute("pricipal");
+		Users principal = (Users) session.getAttribute("principal");
 		// request에서 타이틀값과 컨탠트 값 널인지 공백인지 확인
 				if
 				(
@@ -33,7 +33,8 @@ public class BoardWriteProcAction implements Action{
 				request.getParameter("content").equals("")||
 				request.getParameter("content")==null
 				) {
-			return;
+					Script.back("글쓰기 실패했습니다.", response);
+					return;
 		}
 	
 			// 리퀘스트에 타이틀 , 컨탠트 값 받기
@@ -46,7 +47,7 @@ public class BoardWriteProcAction implements Action{
 						.userid(principal.getId())
 						.title(title)
 						.content(content)
-						.readcount(0)
+						.readCount(0)
 						.build();
 						
 			// 보드리포짓토리 연결해서 save(board) 함수 호출
@@ -54,7 +55,7 @@ public class BoardWriteProcAction implements Action{
 				int result = boardRepository.save(board);
 			//result == 1 이면 성공 로직 (index.jsp로 이동)
 				if (result == 1) {
-					Script.href("글쓰기 성공했습니다.", "/blog/index.jsp", response);
+					Script.href("글쓰기 성공했습니다.", "index.jsp", response);
 				}else {
 					Script.back("글쓰기 실패했습니다.", response);
 				}

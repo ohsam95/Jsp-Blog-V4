@@ -51,7 +51,7 @@ public class BoardRepository {
 		pstmt.setInt(1, board.getUserid());
 		pstmt.setString(2, board.getTitle());
 		pstmt.setString(3, board.getContent());
-		pstmt.setInt(4, board.getReadcount());
+		pstmt.setInt(4, board.getReadCount());
 
 		return pstmt.executeUpdate();
 		
@@ -103,12 +103,24 @@ public class BoardRepository {
 	}
 	
 	public List<Board> findAll() {
-		final String SQL = "";
+		final String SQL = "select * from board order by id desc";
 		List<Board> boards = new ArrayList<>();
 		try {
 		conn = DBConn.getConnection();
 		pstmt = conn.prepareStatement(SQL);
 		//물음표 완성하기
+		rs = pstmt.executeQuery();
+		while (rs.next()) {
+			Board board = new Board(
+					rs.getInt("id"),
+					rs.getInt("userid"),
+					rs.getString("title"),
+					rs.getString("content"),
+					rs.getInt("readCount"),
+					rs.getTimestamp("createDate")
+					);
+				boards.add(board);
+		}
 		//while 돌려서 rs
 		return boards;
 		
@@ -116,7 +128,7 @@ public class BoardRepository {
 			e.printStackTrace();
 			System.out.println(TAG+"findAll : "+e.getMessage());
 		}finally {
-			DBConn.close(conn, pstmt);
+			DBConn.close(conn, pstmt,rs);
 		}
 		
 		return null;

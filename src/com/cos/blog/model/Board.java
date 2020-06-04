@@ -16,6 +16,6 @@ public class Board {
 	private int userid;
 	private String title;
 	private String content;
-	private int readcount;
-	private Timestamp createdate;
+	private int readCount;
+	private Timestamp createDate;
 }
